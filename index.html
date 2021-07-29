@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <style>
+        .vent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        #win {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: red;
+            font-size: 45;
+            cursor: pointer;
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        function init() {
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 4; j++) {
+                    if (Math.random() > 0.5) {
+                        var img = document.getElementById('v' + i + j);
+                        rotate(img, 1);
+                    }
+                }
+            }
+        }
+        function check() {
+            var win = true;
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 4; j++) {
+                    var img = document.getElementById('v' + i + j);
+                    if (img.style.transform != "") {
+                        win = false;
+                    }
+                }
+            }
+            if (win) {
+                this.document.getElementById("win").visibility = 'visible';
+            } else {
+                this.document.getElementById("win").visibility = 'hidden';
+            }
+        }
+        function rotate(me, rotated) {
+            var m = me.style.transform;
+            if (m == "") m = "rotate(90deg)";
+            else m = "";
+            me.style.transform = m;
+            if (rotated == 1) return;
+            var _id = me.id;
+            var fn = parseInt(_id[1]);
+            var sn = parseInt(_id[2]);
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 4; j++) {
+                    if ((i == fn || j == sn)) {
+                        if (i == fn && j == sn) continue;
+                        var img = document.getElementById('v' + i + j);
+                        rotate(img, 1);
+                    }
+                }
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <img src='fridge_base.jpg' width="100%" height="auto">
+
+    <img id="v00" class="vent" src="vent.png" style="top:25%;left:37%" onclick="rotate(this)">
+    <img id="v01" class="vent" src="vent.png" style="top:25%;left:44%" onclick="rotate(this)">
+    <img id="v02" class="vent" src="vent.png" style="top:25%;left:51%" onclick="rotate(this)">
+    <img id="v03" class="vent" src="vent.png" style="top:25%;left:58%" onclick="rotate(this)">
+
+    <img id="v10" class="vent" src="vent.png" style="top:45%;left:37%" onclick="rotate(this)">
+    <img id="v11" class="vent" src="vent.png" style="top:45%;left:44%" onclick="rotate(this)">
+    <img id="v12" class="vent" src="vent.png" style="top:45%;left:51%" onclick="rotate(this)">
+    <img id="v13" class="vent" src="vent.png" style="top:45%;left:58%" onclick="rotate(this)">
+
+    <img id="v20" class="vent" src="vent.png" style="top:65%;left:37%" onclick="rotate(this)">
+    <img id="v21" class="vent" src="vent.png" style="top:65%;left:44%" onclick="rotate(this)">
+    <img id="v22" class="vent" src="vent.png" style="top:65%;left:51%" onclick="rotate(this)">
+    <img id="v23" class="vent" src="vent.png" style="top:65%;left:58%" onclick="rotate(this)">
+
+    <img id="v30" class="vent" src="vent.png" style="top:85%;left:37%" onclick="rotate(this)">
+    <img id="v31" class="vent" src="vent.png" style="top:85%;left:44%" onclick="rotate(this)">
+    <img id="v32" class="vent" src="vent.png" style="top:85%;left:51%" onclick="rotate(this)">
+    <img id="v33" class="vent" src="vent.png" style="top:85%;left:58%" onclick="rotate(this)">
+
+    <span id="win" onclick="init()">Win!</span>
+</body>
+<script>
+    init();
+</script>
+
+</html>
